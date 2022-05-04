@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>What is my CSE 2315 grade??</title>
+</head>
+
+<body>
+	<p>Go to your Canvas's Grades page, check off "Calculate based only on graded assignments."</p>
+	<p>Your Canvas Percentage (e.g. "93.32"): </p> <input type="text" id="percentage">
+	<p>Your Lowest Quiz Grade (e.g. "16"): </p> <input type="text" id="lowest"> <br>
+	<button type="button" id="calculate">Calculate</button>
+	<script>
+		const CanvasTotalPoints = 449
+		const ActualTotalPoints = 409
+
+		document.getElementById('calculate').onclick = calculate
+
+		function calculate() {
+			const percentageInput = document.getElementById('percentage')
+			const lowestInput = document.getElementById('lowest')
+			const percentage = parseFloat(percentageInput.value)
+			const lowest = parseFloat(lowestInput.value)
+			const grade = Math.round((CanvasTotalPoints * percentage - lowest * 100) / ActualTotalPoints)
+			const letter = (() => {
+				if (grade >= 90) {
+					return 'A'
+				} else if (grade >= 80) {
+					return 'B'
+				} else if (grade >= 70) {
+					return 'C'
+				} else if (grade >= 60) {
+					return 'D'
+				} else {
+					return 'F'
+				}
+			})()
+			alert(`Your actual grade might be ${grade}% (${letter}). Don't actually trust me bro`);
+		}
+	</script>
+</body>
+
+</html>
